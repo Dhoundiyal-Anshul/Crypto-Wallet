@@ -1,21 +1,69 @@
 import React from "react";
+import { Suspense, lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Bitcoin from "./components/Bitcoin";
-import Ethereum from "./components/Ethereum";
-import Solana from "./components/Solana";
-import Landing from "./components/Landing/Landing";
-import Choosing_chain from "./components/Choosing_chain";
+const Seed_Phrase = lazy(() => import("./components/Seed_Phrase"));
+const Bitcoin = lazy(() => import("./components/Bitcoin"));
+const Ethereum = lazy(() => import("./components/Ethereum"));
+const Solana = lazy(() => import("./components/Solana"));
+const Landing = lazy(() => import("./components/Landing/Landing"));
+const Choosing_chain = lazy(() => import("./components/Choosing_chain"));
+
 function App() {
   return (
     <div>
-      <div>{/* <h1>TOP BAR</h1> */}</div>
+      <div className="flex items-center justify-center h-16 mt-50">
+        <h1>world's simplest wallet</h1>
+      </div>
       <BrowserRouter>
         <Routes>
-          <Route path="/Choose" element={<Choosing_chain />} />
-          <Route path="/" element={<Landing />} />
-          <Route path="/Choose/Bitcoin" element={<Bitcoin />} />
-          <Route path="/Choose/Solana" element={<Solana />} />
-          <Route path="/Choose/Ethereum" element={<Ethereum />} />
+          <Route
+            path="/Home"
+            element={
+              <Suspense>
+                <Seed_Phrase />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/Chain"
+            element={
+              <Suspense>
+                <Choosing_chain />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <Suspense>
+                <Landing />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/Bitcoin"
+            element={
+              <Suspense>
+                <Bitcoin />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/Solana"
+            element={
+              <Suspense>
+                <Solana />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/Ethereum"
+            element={
+              <Suspense>
+                <Ethereum />
+              </Suspense>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,7 +1,7 @@
 export default function Bitcoin() {
   return (
     <>
-      <h1>Bitcoin PRIVATE KEY AND PUBLIC KEY</h1>
+      <h1>Bitcoin PUBLIC KEY</h1>
     </>
   );
 }
