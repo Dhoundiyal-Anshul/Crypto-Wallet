@@ -1,11 +1,9 @@
-import { generateMnemonic } from "bip39";
-// Generate a 12-word mnemonic
-const mnemonic = generateMnemonic();
-console.log("Generated Mnemonic:", mnemonic);
+import seed from "./Seed_Phrase.jsx";
 export default function Solana() {
   return (
-    <>
-      <h1>{mnemonic}</h1>
-    </>
+    <div>
+      <h1>solana</h1>
+      <h2>{seed}</h2>
+    </div>
   );
 }
