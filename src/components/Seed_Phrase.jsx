@@ -1,18 +1,25 @@
 import React from "react";
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import { generateMnemonic, mnemonicToSeedSync } from "bip39";
+import { mnemonicAtom, seedAtom } from "../atoms";
 
 export default function Seed_Phrase() {
   const navigate = useNavigate();
-  const [generate, setGenerate] = useState("");
+  const [generate, setGenerate] = useRecoilState(mnemonicAtom);
+  const [seed, setSeed] = useRecoilState(seedAtom);
   const generateFunction = useCallback(() => {
     const generatedMnemonic = generateMnemonic();
-    const seed = mnemonicToSeedSync(generatedMnemonic);
-    setGenerate(generatedMnemonic);
-  }, []);
 
+    const seed = mnemonicToSeedSync(generatedMnemonic);
+    // const seedHex = seed.toString("hex"); // Convert to hex
+    setGenerate(generatedMnemonic);
+    // change seed value in it's atom
+    setSeed(seed);
+    console.log(seed.toString("hex"));
+  }, []);
   return (
     <div className="flex flex-col items-center justify-center">
       <button onClick={generateFunction}>Seed Phrase</button>
